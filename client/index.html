@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urodziny Patrycji</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
+        integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="anim.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1 class="title anim">
+            Czy będziesz we Wrocławiu 31 października (poniedziałek)?
+        </h1>
+
+        <form id="form" class="form" method="post">
+
+            <div class="form__container anim">
+
+                <label class="person__label">Podaj swoje inicjały</label>
+                <input id="voter" class="person__input pink" type="text" name="person" maxlength="2" required />
+
+            </div>
+
+            <div class="form__container anim">
+
+                <p>Odpowiedź</p>
+                <input class="answer__input" type="radio" id="answer-yes" name="answer" value="yes" />
+                <label class="answer__label pink" for="answer-yes">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path fill="currentColor"
+                            d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" />
+                    </svg>
+                    Tak, będę obecny!
+                </label>
+
+                <input class="answer__input" type="radio" id="answer-no" name="answer" value="no" />
+                <label class="answer__label pink" for="answer-no">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path fill="currentColor"
+                            d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" />
+                    </svg>
+                    Nie będzie mnie
+                </label>
+
+                <input class="answer__input" type="radio" id="answer-tentative" name="answer" value="tentative"
+                    checked />
+                <label class="answer__label pink" for="answer-tentative">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path fill="currentColor"
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </svg>
+                    Nie wiem
+                </label>
+
+                <button onclick="handleSubmitClick()" id="submit" class="pink">
+                    <p>Prześlij odpowiedź</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z" />
+                        <path fill="currentColor"
+                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                    </svg>
+                </button>
+            </div>
+
+
+        </form>
+
+        <div class="form__container hidden " id="results">
+            <div class="pink result">
+                <div class="bar" id="bar-yes"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path fill="currentColor" d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" />
+                </svg>
+                <p>Tak, będę obecny!</p>
+                <span class="percent" id="percent-yes"></span>
+            </div>
+            <div class="pink result">
+                <div class="bar" id="bar-no"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path fill="currentColor"
+                        d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" />
+                </svg>
+                <p>Nie będzie mnie</p>
+                <span class="percent" id="percent-no"></span>
+            </div>
+            <div class="pink result">
+                <div class="bar" id="bar-tentative"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0H24V24H0z" />
+                    <path fill="currentColor"
+                        d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                </svg>
+                <p>Nie wiem</p>
+                <span class="percent" id="percent-tentative"></span>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
