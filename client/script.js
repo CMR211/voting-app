@@ -1,6 +1,4 @@
-const SERVER_PATH = "http://localhost:3000"
-
-setFormActionPath(SERVER_PATH + "/vote")
+// setFormActionPath("/vote")
 changeViewIfVoted()
 displayResults()
 
@@ -30,7 +28,7 @@ function setFormActionPath(path) {
 }
 
 async function fetchVotesData() {
-    const data = await fetch(SERVER_PATH + "/votes")
+    const data = await fetch("/votes")
     const json = await data.json()
     return json
 }

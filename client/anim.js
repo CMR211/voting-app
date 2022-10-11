@@ -6,8 +6,3 @@ gsap.from(".anim", {
     stagger: 0.5,
 })
 
-gsap.from("#submit", {
-    opacity: 0,
-    x: -200,
-    duration: 1,
-})
