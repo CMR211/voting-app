@@ -1,8 +1,11 @@
 // loading libraries
-const express = require("express")
-const fs = require("fs").promises
-const path = require("path")
+
+// fs only needed to work on local files
+// const fs = require("fs").promises 
 require("dotenv").config()
+
+const express = require("express")
+const path = require("path")
 const db = require("./db.js")
 
 const PORT = process.env.PORT || 3000
