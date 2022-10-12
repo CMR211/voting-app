@@ -1,1 +1,13 @@
-{"votes":{"yes":1,"no":1,"tentative":0},"voted":[]}
+{
+    "_name": "votes",
+    "votes": [
+        {
+            "person": "BS",
+            "vote": "yes"
+        },
+        {
+            "person": "MM",
+            "vote": "no"
+        }
+    ]
+}
