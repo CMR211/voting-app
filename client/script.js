@@ -3,14 +3,14 @@ changeViewIfVoted()
 displayResults()
 
 async function displayResults() {
-    const votes = await fetchVotesData()
-    for (let item of votes) {
-        const bar = document.getElementById("bar-" + item.label.toLowerCase())
+    const results = await fetchVotesData()
+    for (let item of Object.keys(results)) {
+        const bar = document.getElementById("bar-" + item)
         const maxWidth = bar.parentElement.offsetWidth
-        const width = Math.round((item.percentage / 100) * maxWidth)
+        const width = Math.round((results[item] / 100) * maxWidth)
         bar.style = `--width: ${width}px`
-        const span = document.getElementById("percent-" + item.label.toLowerCase())
-        span.innerText = `${item.percentage}%`
+        const span = document.getElementById("percent-" + item)
+        span.innerText = `${results[item]}%`
     }
 }
 
